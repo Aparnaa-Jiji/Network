@@ -1,15 +1,21 @@
-
 echo "Enter the coefficients of the quadratic equation (a, b, c):"
 read a b c
-
-
-d=$(echo "$b * $b - 4 * $a * $c" | bc)
-
-if (( $(echo "$d < 0" | bc -l) )); then
+discriminant=$((b*b-4*a*c))
+if [ $discriminant -lt 0 ]
+then
     echo "The quadratic equation has no real roots."
 else
-    root1=$(echo "scale=2; (-$b + sqrt($d)) / (2 * $a)" | bc -l)
-    root2=$(echo "scale=2; (-$b - sqrt($d)) / (2 * $a)" | bc -l)
+    root1=$(echo "scale=2; (-$b + sqrt($discriminant)) / (2*$a)" | bc)
+    root2=$(echo "scale=2; (-$b - sqrt($discriminant)) / (2*$a)" | bc)
     echo "The roots of the quadratic equation are: $root1 and $root2"
 fi
 
+
+Output:
+Enter the coefficients of the quadratic equation (a, b, c):
+2 3 -2
+The roots of the quadratic equation are: .50 and -2.00
+
+Enter the coefficients of the quadratic equation (a, b, c):
+1 2 3
+The quadratic equation has no real roots.
